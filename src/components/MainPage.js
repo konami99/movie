@@ -1,0 +1,94 @@
+import React, { Component } from 'react';
+import { ScrollView, View, Text, Button, FlatList, StyleSheet } from 'react-native';
+import { ListSection, ListItem } from 'react-native-paper';
+import { COLORS } from '../state/Colors.js';
+import { connect } from 'react-redux';
+
+
+class MainPage extends Component {
+  static navigationOptions = {
+    title: 'Movie',
+  };
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      loading: false,
+      data: [],
+      page: 1,
+      seed: 1,
+      error: null,
+      refreshing: false,
+    };
+  }
+
+  onChooseColor() {
+    this.props.navigation.navigate('ChooseColor')
+  }
+
+  componentDidMount() {
+    this.makeRemoteRequest();
+  }
+
+  makeRemoteRequest = () => {
+    const { page, seed } = this.state;
+    const url = `https://randomuser.me/api/?seed=${seed}&page=${page}&results=40`;
+    this.setState({ loading: true });
+    fetch(url)
+      .then(res => res.json())
+      .then(res => {
+        this.setState({
+          data: page === 1 ? res.results : [...this.state.data, ...res.results],
+          error: res.error || null,
+          loading: false,
+          refreshing: false
+        });
+      })
+      .catch(error => {
+        this.setState({ error, loading: false });
+      });
+  };
+
+  selectedColor() {
+    const { colorName } = this.props;
+    return COLORS[colorName].hexCode;
+  }
+
+  render() {
+    const color = this.selectedColor();
+
+    
+
+    return (
+      <ScrollView style={[styles.container]}>
+        <ListSection>
+          {
+            this.state.data.map((object, i) => (
+              <ListItem key={i}
+              title="First Item" description="Item description" icon="folder"
+              />
+            ))
+            
+          }
+        </ListSection>
+      </ScrollView>
+    )
+  }
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  avatar: {
+    height: 40,
+    width: 40,
+  },
+});
+
+const mapStateToProps = state => {
+  return { colorName: state.color.colorName };
+};
+
+export default connect(mapStateToProps)(MainPage);
