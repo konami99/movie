@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { ScrollView, View, Text, Button, FlatList, StyleSheet } from 'react-native';
-import { ListSection, ListItem } from 'react-native-paper';
+import { ScrollView, View, Text, FlatList, StyleSheet } from 'react-native';
+import { ListSection, ListItem, Button, Card, CardActions, CardContent, CardCover, Title, Paragraph } from 'react-native-paper';
 import { COLORS } from '../state/Colors.js';
 import { connect } from 'react-redux';
 
@@ -62,16 +62,24 @@ class MainPage extends Component {
 
     return (
       <ScrollView style={[styles.container]}>
-        <ListSection>
+        
           {
             this.state.data.map((object, i) => (
-              <ListItem key={i}
-              title="First Item" description="Item description" icon="folder"
-              />
+              <Card key={i}>
+                <CardContent>
+                  <Title>Card title</Title>
+                  <Paragraph>Card content</Paragraph>
+                </CardContent>
+                <CardCover source={{ uri: object.picture.large }} />
+                <CardActions>
+                  <Button>Cancel</Button>
+                  <Button>Ok</Button>
+                </CardActions>
+              </Card>
             ))
             
           }
-        </ListSection>
+        
       </ScrollView>
     )
   }
