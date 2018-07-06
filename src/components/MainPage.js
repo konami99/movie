@@ -8,6 +8,7 @@ import { connect } from 'react-redux';
 class MainPage extends Component {
   static navigationOptions = {
     title: 'Movie',
+    header: null
   };
 
   constructor(props) {

@@ -17,8 +17,8 @@ const middleware = createReactNavigationReduxMiddleware(
 );
 
 const RootNavigator = createStackNavigator({
-  Main: { screen: MainPage },
-  ChooseColor: { screen: ChooseColorPage }
+  Main: MainPage ,
+  ChooseColor: ChooseColorPage
 });
 
 const AppWithNavigationState = reduxifyNavigator(RootNavigator, 'root');
