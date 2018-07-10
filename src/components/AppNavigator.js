@@ -8,7 +8,7 @@ import {
 } from 'react-navigation-redux-helpers';
 
 import MainPage from './MainPage';
-import ChooseColorPage from './ChooseColorPage';
+import DetailPage from './DetailPage';
 
 
 const middleware = createReactNavigationReduxMiddleware(
@@ -18,7 +18,7 @@ const middleware = createReactNavigationReduxMiddleware(
 
 const RootNavigator = createStackNavigator({
   Main: MainPage ,
-  ChooseColor: ChooseColorPage
+  Detail: DetailPage
 });
 
 const AppWithNavigationState = reduxifyNavigator(RootNavigator, 'root');

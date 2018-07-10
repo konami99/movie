@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ScrollView, View, Text, FlatList, StyleSheet } from 'react-native';
+import { ScrollView, StyleSheet } from 'react-native';
 import { ListSection, ListItem, Button, Card, CardActions, CardContent, CardCover, Title, Paragraph } from 'react-native-paper';
 import { COLORS } from '../state/Colors.js';
 import { connect } from 'react-redux';
@@ -59,30 +59,23 @@ class MainPage extends Component {
   render() {
     const color = this.selectedColor();
 
-    
-
-    return (
-      <ScrollView style={[styles.container]}>
-        
-          {
-            this.state.data.map((object, i) => (
-              <Card key={i}>
-                <CardContent>
-                  <Title>Card title</Title>
-                  <Paragraph>Card content</Paragraph>
-                </CardContent>
-                <CardCover source={{ uri: object.picture.large }} />
-                <CardActions>
-                  <Button>Cancel</Button>
-                  <Button>Ok</Button>
-                </CardActions>
-              </Card>
-            ))
-            
-          }
-        
-      </ScrollView>
-    )
+    return <ScrollView style={[styles.container]}>
+      {
+        this.state.data.map((object, i) => (
+          <Card key={i} onPress={() => this.props.navigation.navigate('Detail')}>
+            <CardContent>
+              <Title>Card title</Title>
+              <Paragraph>Card content</Paragraph>
+            </CardContent>
+            <CardCover source={{ uri: object.picture.large }} />
+            <CardActions>
+              <Button>Cancel</Button>
+              <Button>Ok</Button>
+            </CardActions>
+          </Card>
+        ))
+      }
+    </ScrollView>
   }
 }
 
