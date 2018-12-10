@@ -24,8 +24,8 @@ class MainPage extends Component {
     };
   }
 
-  onChooseColor() {
-    this.props.navigation.navigate('ChooseColor')
+  onDetail() {
+    this.props.navigation.navigate('Detail')
   }
 
   componentDidMount() {
@@ -62,7 +62,7 @@ class MainPage extends Component {
     return <ScrollView style={[styles.container]}>
       {
         this.state.data.map((object, i) => (
-          <Card key={i} onPress={() => this.props.navigation.navigate('Detail')}>
+          <Card key={i} onPress={() => this.onDetail()}>
             <CardContent>
               <Title>Card title</Title>
               <Paragraph>Card content</Paragraph>
